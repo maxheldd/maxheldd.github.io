@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Francesco's Pizzeria</title>
+    <meta
+      name="description"
+      content="Francesco's Pizzeria in Newtown, PA serving pizza, cheesesteaks, hoagies, wraps, catering trays, and house specialties."
+    />
+    <style>
+      :root {
+        --cream: #f6f1e5;
+        --paper: #fffdf8;
+        --ink: #151515;
+        --muted: #645f56;
+        --olive: #5b6e2d;
+        --olive-deep: #42501f;
+        --brick: #8f342f;
+        --brick-deep: #6f2723;
+        --line: #ddd4c6;
+        --shadow: 0 18px 50px rgba(21, 21, 21, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Trebuchet MS", "Avenir Next Condensed", Arial, sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top, rgba(91, 110, 45, 0.07), transparent 32%),
+          linear-gradient(180deg, #fbf8f2 0%, #f2ebde 100%);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      .shell {
+        width: min(1200px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(18px);
+        background: rgba(255, 253, 248, 0.9);
+        border-bottom: 1px solid rgba(111, 39, 35, 0.08);
+      }
+
+      .topbar-inner {
+        min-height: 82px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .brand-mark {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--brick) 0%, var(--olive) 100%);
+        display: grid;
+        place-items: center;
+        color: white;
+        font-size: 24px;
+        box-shadow: var(--shadow);
+      }
+
+      .brand-copy {
+        line-height: 1;
+      }
+
+      .eyebrow {
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        color: var(--muted);
+      }
+
+      .brand-name {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(1.4rem, 2vw, 1.8rem);
+        letter-spacing: 0.06em;
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .nav a {
+        font-size: 0.95rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        min-height: 48px;
+        padding: 0 22px;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      }
+
+      .button:hover {
+        transform: translateY(-2px);
+      }
+
+      .button.primary {
+        background: var(--olive);
+        color: white;
+      }
+
+      .button.secondary {
+        background: white;
+        border-color: rgba(21, 21, 21, 0.12);
+      }
+
+      .hero {
+        padding: 28px 0 38px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.25fr 0.95fr;
+        border-radius: 34px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        background: var(--paper);
+      }
+
+      .hero-media {
+        min-height: 620px;
+        position: relative;
+        background: linear-gradient(180deg, rgba(21, 21, 21, 0.15), rgba(21, 21, 21, 0.35));
+      }
+
+      .hero-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .hero-media::after {
+        content: "Francesco's Pizzeria";
+        position: absolute;
+        left: 24px;
+        bottom: 24px;
+        color: rgba(255, 255, 255, 0.92);
+        font-size: 0.9rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(21, 21, 21, 0.38);
+        backdrop-filter: blur(12px);
+      }
+
+      .hero-media.is-missing::before {
+        content: "Add images/hero-storefront.jpg";
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        background:
+          linear-gradient(180deg, rgba(21, 21, 21, 0.18), rgba(21, 21, 21, 0.45)),
+          linear-gradient(135deg, rgba(139, 52, 47, 0.45), rgba(91, 110, 45, 0.18)),
+          linear-gradient(140deg, #5d4635 0%, #b78e5d 38%, #e5c08a 62%, #3c3028 100%);
+        color: white;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+      }
+
+      .hero-copy {
+        padding: 54px 42px 42px;
+        background:
+          radial-gradient(circle at top right, rgba(91, 110, 45, 0.13), transparent 34%),
+          linear-gradient(180deg, #1f1f1d 0%, #282826 100%);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 28px;
+      }
+
+      .hero-copy h1 {
+        margin: 8px 0 18px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 500;
+        font-size: clamp(2.8rem, 5vw, 5rem);
+        line-height: 0.95;
+        letter-spacing: 0.05em;
+      }
+
+      .hero-copy p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.82);
+        font-size: 1.05rem;
+        line-height: 1.65;
+      }
+
+      .hero-badges,
+      .chip-row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.09);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        font-size: 0.83rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .hero-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .hero-actions .button.secondary {
+        background: transparent;
+        border-color: rgba(255, 255, 255, 0.22);
+        color: white;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .stat {
+        padding: 16px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .stat strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 1.3rem;
+      }
+
+      .section {
+        padding: 34px 0;
+      }
+
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        align-items: end;
+        margin-bottom: 22px;
+      }
+
+      .section-header h2 {
+        margin: 8px 0 0;
+        font-size: clamp(2rem, 4vw, 3.4rem);
+        line-height: 0.95;
+        text-transform: uppercase;
+      }
+
+      .section-header p {
+        max-width: 560px;
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .quick-grid,
+      .menu-grid,
+      .info-grid,
+      .catering-grid {
+        display: grid;
+        gap: 18px;
+      }
+
+      .quick-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .quick-card,
+      .menu-card,
+      .panel,
+      .catering-card {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        box-shadow: var(--shadow);
+      }
+
+      .quick-card {
+        padding: 24px;
+      }
+
+      .quick-card h3,
+      .menu-card h3,
+      .panel h3,
+      .catering-card h3 {
+        margin: 0 0 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .quick-card p,
+      .panel p,
+      .catering-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .menu-toolbar {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        margin-bottom: 18px;
+      }
+
+      .menu-filter {
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.75);
+        color: var(--ink);
+        cursor: pointer;
+      }
+
+      .menu-filter.is-active {
+        background: var(--brick);
+        color: white;
+        border-color: var(--brick);
+      }
+
+      .menu-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .gallery-wrap {
+        position: relative;
+        overflow: hidden;
+        border-radius: 28px;
+        background: #181816;
+        padding: 18px;
+        box-shadow: var(--shadow);
+      }
+
+      .gallery-track {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(260px, 32%);
+        gap: 16px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        padding-bottom: 8px;
+      }
+
+      .gallery-track::-webkit-scrollbar {
+        height: 10px;
+      }
+
+      .gallery-track::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.18);
+        border-radius: 999px;
+      }
+
+      .gallery-slide {
+        position: relative;
+        min-height: 360px;
+        border-radius: 22px;
+        overflow: hidden;
+        scroll-snap-align: start;
+        background: linear-gradient(135deg, #8f342f, #42501f);
+      }
+
+      .gallery-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .gallery-slide span {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        padding: 10px 12px;
+        border-radius: 999px;
+        background: rgba(21, 21, 21, 0.46);
+        color: white;
+        font-size: 0.78rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .gallery-slide.is-missing::before {
+        content: attr(data-missing);
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.82rem;
+        padding: 24px;
+        text-align: center;
+      }
+
+      .gallery-controls {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+        margin-top: 14px;
+      }
+
+      .gallery-button {
+        min-width: 52px;
+        min-height: 52px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        background: rgba(255, 255, 255, 0.08);
+        color: white;
+        cursor: pointer;
+      }
+
+      .menu-card {
+        padding: 24px;
+      }
+
+      .menu-meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        align-items: center;
+        margin-bottom: 14px;
+      }
+
+      .menu-note {
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin: 0 0 16px;
+      }
+
+      .menu-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .menu-item {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 14px;
+        align-items: start;
+        padding-top: 12px;
+        border-top: 1px dashed rgba(100, 95, 86, 0.22);
+      }
+
+      .menu-item:first-child {
+        border-top: 0;
+        padding-top: 0;
+      }
+
+      .menu-item strong {
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .menu-item span {
+        color: var(--muted);
+        line-height: 1.45;
+        font-size: 0.93rem;
+      }
+
+      .price {
+        white-space: nowrap;
+        font-weight: 700;
+      }
+
+      .feature-band {
+        border-radius: 28px;
+        overflow: hidden;
+        background:
+          linear-gradient(120deg, var(--brick) 0%, var(--brick-deep) 36%, var(--olive-deep) 100%);
+        color: white;
+        padding: 28px;
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: 18px;
+        align-items: center;
+      }
+
+      .feature-band h2 {
+        margin: 0 0 12px;
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        line-height: 0.95;
+        text-transform: uppercase;
+      }
+
+      .feature-band p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.82);
+        line-height: 1.65;
+      }
+
+      .catering-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .catering-card {
+        padding: 24px;
+      }
+
+      .tray-list,
+      .bullet-list {
+        display: grid;
+        gap: 10px;
+      }
+
+      .tray-item,
+      .bullet-list li {
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .info-grid {
+        grid-template-columns: 1.1fr 0.9fr;
+      }
+
+      .panel {
+        padding: 26px;
+      }
+
+      .panel blockquote {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 1.28rem;
+        line-height: 1.6;
+      }
+
+      .two-col-list {
+        columns: 2;
+        gap: 28px;
+        padding-left: 20px;
+        margin: 14px 0 0;
+      }
+
+      .two-col-list li {
+        margin-bottom: 10px;
+        color: var(--muted);
+      }
+
+      .contact-card {
+        background: #201f1e;
+        color: white;
+      }
+
+      .contact-card p,
+      .contact-card li {
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .contact-links {
+        display: grid;
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .contact-links a {
+        padding: 14px 16px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      footer {
+        padding: 28px 0 44px;
+        color: var(--muted);
+      }
+
+      .fade-in {
+        opacity: 0;
+        transform: translateY(18px);
+        animation: rise 0.7s ease forwards;
+      }
+
+      .fade-in:nth-child(2) {
+        animation-delay: 0.08s;
+      }
+
+      .fade-in:nth-child(3) {
+        animation-delay: 0.16s;
+      }
+
+      .fade-in:nth-child(4) {
+        animation-delay: 0.24s;
+      }
+
+      @keyframes rise {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 980px) {
+        .hero-grid,
+        .feature-band,
+        .info-grid,
+        .catering-grid,
+        .menu-grid,
+        .quick-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-media {
+          min-height: 360px;
+        }
+
+        .gallery-track {
+          grid-auto-columns: 82%;
+        }
+
+        .stats {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .topbar-inner,
+        .section-header {
+          align-items: start;
+          flex-direction: column;
+        }
+
+        .hero-copy {
+          padding: 34px 24px 28px;
+        }
+
+        .hero-copy h1 {
+          font-size: 2.8rem;
+        }
+
+        .hero-media::after {
+          white-space: normal;
+          width: calc(100% - 32px);
+          text-align: center;
+        }
+
+        .two-col-list {
+          columns: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="shell topbar-inner">
+        <a class="brand" href="#top">
+          <div class="brand-mark">🍕</div>
+          <div class="brand-copy">
+            <div class="eyebrow">Est. 2017</div>
+            <div class="brand-name">Francesco's Pizzeria</div>
+          </div>
+        </a>
+        <nav class="nav">
+          <a href="#menu">Menu</a>
+          <a href="#catering">Catering</a>
+          <a href="#about">About</a>
+          <a href="#visit">Visit</a>
+          <a class="button primary" href="tel:2159681005">Call Now</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="shell hero-grid">
+          <div class="hero-media is-missing" id="heroMedia">
+            <img
+              src="images/hero-storefront.jpg"
+              alt="Francesco's Pizzeria storefront"
+              onload="this.parentElement.classList.remove('is-missing')"
+              onerror="this.remove()"
+            />
+          </div>
+          <div class="hero-copy">
+            <div>
+              <div class="eyebrow" id="heroEyebrow">Newtown, Pennsylvania</div>
+              <h1 id="heroTitle">Francesco's<br />Pizzeria</h1>
+              <p id="heroParagraph">
+                Pizza, cheesesteaks, hoagies, wraps, wings, salads, entrées, and
+                full catering trays from a neighborhood spot built on family roots,
+                hard work, and real Mediterranean-inspired cooking.
+              </p>
+            </div>
+            <div class="hero-badges">
+              <div class="chip">Delivery</div>
+              <div class="chip">Takeout</div>
+              <div class="chip">Dine-In</div>
+              <div class="chip">Lunch &amp; Dinner</div>
+              <div class="chip">Coffee</div>
+            </div>
+            <div class="hero-actions">
+              <a class="button primary" href="#menu">Explore Menu</a>
+              <a class="button secondary" href="#catering">Catering Trays</a>
+            </div>
+            <div class="stats">
+              <div class="stat">
+                <strong id="statAddressTitle">104 Pheasant Run</strong>
+                <span id="statAddressText">Newtown, PA 18940</span>
+              </div>
+              <div class="stat">
+                <strong id="statPhoneTitle">(215) 968-1005</strong>
+                <span id="statPhoneText">Call ahead for pickup or catering</span>
+              </div>
+              <div class="stat">
+                <strong id="statCateringTitle">24 Hours Notice</strong>
+                <span id="statCateringText">Requested for catering orders</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="shell quick-grid">
+          <article class="quick-card fade-in">
+            <h3>Most Ordered</h3>
+            <p>Cheese pizza, buffalo chicken pizza, cheesesteaks, hoagies, and wings.</p>
+          </article>
+          <article class="quick-card fade-in">
+            <h3>Local Favorite</h3>
+            <p>Known for pizza shop classics done with homemade dough, sauce, and family recipes.</p>
+          </article>
+          <article class="quick-card fade-in">
+            <h3>Good For</h3>
+            <p>Lunch, dinner, solo dining, quick takeout, and larger office or family orders.</p>
+          </article>
+          <article class="quick-card fade-in">
+            <h3>Accessibility</h3>
+            <p>Wheelchair accessible entrance, parking lot, restroom, and seating.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="menu">
+        <div class="shell">
+          <div class="section-header">
+            <div>
+              <div class="eyebrow" id="menuEyebrow">Francesco's Menu</div>
+              <h2 id="menuTitle">From Pizza To Platters</h2>
+            </div>
+          </div>
+          <div class="menu-toolbar" id="menuFilters"></div>
+          <div class="menu-grid" id="menuGrid"></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="shell">
+          <div class="section-header">
+            <div>
+              <div class="eyebrow" id="galleryEyebrow">Inside Francesco's</div>
+              <h2 id="galleryTitle">Food Gallery</h2>
+            </div>
+            <p id="galleryParagraph">
+              Sliding food and storefront images placed right after the menu, before the
+              service highlight section.
+            </p>
+          </div>
+          <div class="gallery-wrap">
+            <div class="gallery-track" id="galleryTrack"></div>
+            <div class="gallery-controls">
+              <button class="gallery-button" id="galleryPrev" type="button" aria-label="Previous images">←</button>
+              <button class="gallery-button" id="galleryNext" type="button" aria-label="Next images">→</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="shell feature-band">
+          <div>
+            <div class="eyebrow" style="color: rgba(255,255,255,0.72)" id="serviceEyebrow">House Specialties</div>
+            <h2 id="serviceTitle">Delivery And Takeout Up Front</h2>
+            <p id="serviceParagraph">
+              Enjoy your favorite meals fresh and fast. We offer convenient delivery,
+              easy takeout, and comfortable dine-in service so you can enjoy great
+              food however you prefer. From handcrafted pizzas and crispy wings to
+              hoagies, wraps, pasta trays, and hearty entr&eacute;es, there&rsquo;s
+              something for everyone.
+            </p>
+          </div>
+          <div class="chip-row">
+            <div class="chip">Wings in multiple flavor styles</div>
+            <div class="chip">Personal, medium, and large pizzas</div>
+            <div class="chip">Wraps, hoagies, and cold clubs</div>
+            <div class="chip">Pasta trays for catering</div>
+            <div class="chip">Salads and soups</div>
+            <div class="chip">Burgers, baskets, and entrées</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="catering">
+        <div class="shell">
+          <div class="section-header">
+            <div>
+            <div class="eyebrow" id="cateringEyebrow">Catering Menu</div>
+              <h2 id="cateringTitle">Party Trays &amp; Catering</h2>
+            </div>
+            <p id="cateringParagraph">
+              Francesco's catering menu fits naturally as its own landing block, with
+              trays, rolls, desserts, pasta pans, and salad packages. Catering requests
+              should be placed at least 24 hours in advance.
+            </p>
+          </div>
+          <div class="catering-grid">
+            <article class="catering-card">
+              <h3>Sandwich Trays</h3>
+              <div class="tray-list">
+                <div class="tray-item"><strong>Hoagie Tray | $96</strong><br />8 full hoagies cut into 4 for 32 mini sandwiches. Includes 3 Italian, 3 turkey &amp; cheese, and 2 ham &amp; cheese.</div>
+                <div class="tray-item"><strong>Wrap Tray | $72</strong><br />8 wraps cut in half for 16 halves. Includes lettuce and tomato. Fixings are not served on the side.</div>
+                <div class="tray-item">Hoagie tray fixings: raw onions, sweet peppers, hot peppers, pickles, mayo, and oil &amp; vinegar on the side.</div>
+              </div>
+            </article>
+            <article class="catering-card">
+              <h3>Rolls &amp; Desserts</h3>
+              <div class="tray-list">
+                <div class="tray-item"><strong>Pepperoni Roll</strong> 10 ct | $20</div>
+                <div class="tray-item"><strong>Spinach &amp; Ricotta Roll</strong> 10 ct | $20</div>
+                <div class="tray-item"><strong>Buffalo Chicken Roll</strong> 10 ct | $25</div>
+                <div class="tray-item"><strong>Cheesesteak Roll</strong> 10 ct | $25</div>
+                <div class="tray-item"><strong>Mini Cannolis</strong> 10 ct | $20, 20 ct | $40</div>
+              </div>
+            </article>
+            <article class="catering-card">
+              <h3>Pasta &amp; Entr&eacute;e Trays</h3>
+              <div class="tray-list">
+                <div class="tray-item"><strong>Vodka Penne</strong> sm. $80 | lg. $150</div>
+                <div class="tray-item"><strong>Baked Penne</strong> sm. $70 | lg. $140</div>
+                <div class="tray-item"><strong>Pesto &amp; Penne</strong> sm. $60 | lg. $120</div>
+                <div class="tray-item"><strong>Chicken Broccoli Alfredo</strong> sm. $85 | lg. $150</div>
+                <div class="tray-item"><strong>Chicken Marsala</strong> sm. $90 | lg. $150</div>
+                <div class="tray-item"><strong>Eggplant Parmigiana</strong> sm. $80 | lg. $140</div>
+                <div class="tray-item"><strong>Chicken Parmigiana</strong> sm. $80 | lg. $150</div>
+                <div class="tray-item"><strong>Ravioli Pomodoro</strong> 25 ct. $78 | 50 ct. $140</div>
+              </div>
+            </article>
+            <article class="catering-card">
+              <h3>Sides &amp; Salads</h3>
+              <div class="tray-list">
+                <div class="tray-item"><strong>Mac &amp; Cheese</strong> sm. $70 | lg. $140</div>
+                <div class="tray-item"><strong>Sausage, Peppers &amp; Onions</strong> sm. $75 | lg. $140</div>
+                <div class="tray-item"><strong>Homemade Meatballs</strong> 20 ct. $75 | 40 ct. $140</div>
+                <div class="tray-item"><strong>Eggplant Rollatini</strong> 25 ct. $70 | 50 ct. $120</div>
+                <div class="tray-item"><strong>Mixed Salad</strong> sm. $20 | lg. $40</div>
+                <div class="tray-item"><strong>Caesar Salad</strong> sm. $25 | lg. $50</div>
+                <div class="tray-item"><strong>Antipasto Salad</strong> sm. $60 | lg. $120</div>
+                <div class="tray-item"><strong>Mediterranean Salad</strong> sm. $60 | lg. $120</div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="about">
+        <div class="shell info-grid">
+          <article class="panel">
+            <div class="eyebrow" id="aboutEyebrow">About Francesco's</div>
+            <h3 id="aboutTitle">Family Roots, Homemade Approach</h3>
+            <blockquote id="aboutQuote">
+              Regardless of where we came from, for many in America our immigrant origins
+              remain a vital part of who we are. Our family roots reach back to small farms
+              in southern Italy, where simple but real good food, homemade dough, homemade
+              sauce, prosciutto, olive oil, and wine were part of everyday life.
+            </blockquote>
+            <p style="margin-top: 18px" id="aboutParagraph">
+              As in most immigrant families, those early lessons centered on hard work and
+              moving ahead. At Francesco's, that shows up in quality ingredients, family
+              recipes, and a kitchen that still treats preparation as craft rather than filler.
+            </p>
+          </article>
+          <article class="panel contact-card" id="visit">
+            <div class="eyebrow" style="color: rgba(255,255,255,0.72)" id="visitEyebrow">Visit</div>
+            <h3 id="visitTitle">Newtown, PA</h3>
+            <p id="visitAddress">
+              104 Pheasant Run<br />
+              Newtown, PA 18940
+            </p>
+            <div class="contact-links">
+              <a href="tel:2159681005" id="phoneLink">(215) 968-1005</a>
+              <a href="http://www.francescospizzerianewtown.com/" target="_blank" rel="noreferrer" id="websiteLink">francescospizzerianewtown.com</a>
+              <a href="http://www.francescospizzerianewtown.com/menu.html" target="_blank" rel="noreferrer" id="menuLink">View menu page</a>
+            </div>
+            <h3 style="margin-top: 22px">Accessibility &amp; Service</h3>
+            <ul class="bullet-list">
+              <li>Wheelchair accessible entrance, parking lot, restroom, and seating.</li>
+              <li>Delivery, takeout, and dine-in service available.</li>
+              <li>Popular for lunch, dinner, solo dining, and local specialties.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <div class="shell">
+        Francesco's Pizzeria • 104 Pheasant Run, Newtown, PA 18940 • (215) 968-1005
+      </div>
+    </footer>
+
+    <script>
+      /*
+        ============================================================
+        EDIT ONLY HERE
+        Change words inside quotes.
+        Change image filenames if you replace photos.
+        Do not edit below the END EDIT ONLY HERE line unless needed.
+        ============================================================
+      */
+
+      const SITE_CONTENT = {
+        heroEyebrow: "Newtown, Pennsylvania",
+        heroTitle: "Francesco's<br />Pizzeria",
+        heroParagraph:
+          "Pizza, cheesesteaks, hoagies, wraps, wings, salads, entrées, and full catering trays from a neighborhood spot built on family roots, hard work, and real Mediterranean-inspired cooking.",
+        statAddressTitle: "104 Pheasant Run",
+        statAddressText: "Newtown, PA 18940",
+        statPhoneTitle: "(215) 968-1005",
+        statPhoneText: "Call ahead for pickup or catering",
+        statCateringTitle: "24 Hours Notice",
+        statCateringText: "Requested for catering orders",
+        menuEyebrow: "Francesco's Menu",
+        menuTitle: "From Pizza To Platters",
+        galleryEyebrow: "Inside Francesco's",
+        galleryTitle: "Food Gallery",
+        galleryParagraph:
+          "Sliding food and storefront images placed right after the menu, before the service highlight section.",
+        serviceEyebrow: "House Specialties",
+        serviceTitle: "Delivery And Takeout Up Front",
+        serviceParagraph:
+          "Enjoy your favorite meals fresh and fast. We offer convenient delivery, easy takeout, and comfortable dine-in service so you can enjoy great food however you prefer. From handcrafted pizzas and crispy wings to hoagies, wraps, pasta trays, and hearty entrées, there’s something for everyone.",
+        cateringEyebrow: "Catering Menu",
+        cateringTitle: "Party Trays &amp; Catering",
+        cateringParagraph:
+          "Francesco's catering menu fits naturally as its own landing block, with trays, rolls, desserts, pasta pans, and salad packages. Catering requests should be placed at least 24 hours in advance.",
+        aboutEyebrow: "About Francesco's",
+        aboutTitle: "Family Roots, Homemade Approach",
+        aboutQuote:
+          "Regardless of where we came from, for many in America our immigrant origins remain a vital part of who we are. Our family roots reach back to small farms in southern Italy, where simple but real good food, homemade dough, homemade sauce, prosciutto, olive oil, and wine were part of everyday life.",
+        aboutParagraph:
+          "As in most immigrant families, those early lessons centered on hard work and moving ahead. At Francesco's, that shows up in quality ingredients, family recipes, and a kitchen that still treats preparation as craft rather than filler.",
+        visitEyebrow: "Visit",
+        visitTitle: "Newtown, PA",
+        visitAddress: "104 Pheasant Run<br />Newtown, PA 18940",
+        phoneNumber: "(215) 968-1005",
+        phoneHref: "tel:2159681005",
+        websiteLabel: "francescospizzerianewtown.com",
+        websiteHref: "http://www.francescospizzerianewtown.com/",
+        menuLinkLabel: "View menu page",
+        menuLinkHref: "http://www.francescospizzerianewtown.com/menu.html"
+      };
+
+      const SITE_IMAGES = {
+        hero: "images/hero-storefront.jpg",
+        gallery: [
+          { src: "images/gallery-1.jpg", label: "Loaded specialty pizza" },
+          { src: "images/gallery-2.jpg", label: "Pepperoni slice" },
+          { src: "images/gallery-3.jpg", label: "Pasta entrée" },
+          { src: "images/gallery-4.jpg", label: "Wings" },
+          { src: "images/gallery-5.jpg", label: "Fresh salad" },
+          { src: "images/gallery-6.jpg", label: "Sandwiches and sides" }
+        ]
+      };
+
+      /*
+        ===================== END EDIT ONLY HERE =====================
+      */
+
+      const menuData = [
+        {
+          category: "Pizza",
+          note: "Personal 10 in. / Medium 14 in. / Large 16 in. pricing where noted.",
+          items: [
+            { name: "Cheese Pizza", desc: "Classic pie.", price: "$9.99 / $12.99 / $13.99" },
+            { name: "White Pizza", desc: "Mozzarella, garlic, extra virgin olive oil.", price: "$10.99 / $14.99 / $15.99" },
+            { name: "Meat Lovers", desc: "Pepperoni, sausage, and ham.", price: "$12.99 / $17.79 / $18.79" },
+            { name: "Meat Feast", desc: "Pepperoni, sausage, ham, meatballs, and bacon.", price: "$13.99 / $19.79 / $20.79" },
+            { name: "Buffalo Chicken", desc: "Buffalo chicken pizza.", price: "$13.99 / $18.79 / $19.79" },
+            { name: "Chicken Bacon Ranch", desc: "Chicken, bacon, ranch.", price: "$13.99 / $18.99 / $20.29" },
+            { name: "Bang Bang Chicken", desc: "Sweet heat chicken pizza.", price: "$13.99 / $18.79 / $19.79" },
+            { name: "Chicken Parmigiana", desc: "Chicken parm pizza.", price: "$13.99 / $17.99 / $18.99" },
+            { name: "The Works", desc: "Pepperoni, sausage, meatballs, mushrooms, peppers, onions.", price: "$12.99 / $17.59 / $18.99" },
+            { name: "Brooklyn Pie", desc: "Thin crust with mozzarella, sauce, fresh garlic, and seasoning.", price: "$18.99" },
+            { name: "Slice / Sicilian Slice", desc: "Grab-and-go option.", price: "$2.50 / $3.00" }
+          ]
+        },
+        {
+          category: "Cheesesteaks",
+          note: "Served with choice of fries, chips, or coleslaw and a pickle.",
+          items: [
+            { name: "Philly-Style Cheesesteak", desc: "Served on a long roll.", price: "$9.99" },
+            { name: "Black Jack Cheesesteak", desc: "Cajun spice, American cheese, tomatoes, raw onions.", price: "$10.99" },
+            { name: "Special Club Steak", desc: "Mushrooms, peppers, pepperoni, onions, cheese, sauce.", price: "$12.99" },
+            { name: "Pizza Steak", desc: "Pizza sauce and cheese.", price: "$10.99" },
+            { name: "Pepperoni Pizza Steak", desc: "Pizza steak with pepperoni.", price: "$11.99" },
+            { name: "Cheesesteak Hoagie", desc: "Loaded hoagie style.", price: "$11.99" },
+            { name: "Chicken Cheesesteak", desc: "Classic chicken version.", price: "$10.99" },
+            { name: "Chicken Cheesesteak Florentine", desc: "Spinach and tomatoes.", price: "$13.99" },
+            { name: "Black Jack Chicken Cheesesteak", desc: "Hot and savory.", price: "$10.99" },
+            { name: "Buffalo Chicken Cheesesteak", desc: "Buffalo sauce with blue cheese.", price: "$11.99" }
+          ]
+        },
+        {
+          category: "Sandwiches",
+          note: "Hot stuffed sandwiches, cold sandwiches, clubs, hoagies, and wraps.",
+          items: [
+            { name: "Meatball Parmigiana", desc: "Clubhouse meatballs with mozzarella and sauce.", price: "$9.99" },
+            { name: "Homemade Crab Cake", desc: "House crab cake with lettuce and tomato.", price: "$11.99" },
+            { name: "Chicken Parmigiana", desc: "Breaded chicken with mozzarella and sauce.", price: "$9.99" },
+            { name: "Hot Roast Beef", desc: "On a Kaiser roll.", price: "$9.99" },
+            { name: "Pork Roll and Cheese", desc: "Served on a Kaiser roll.", price: "$8.99" },
+            { name: "Bacon Cheeseburger Club", desc: "Cold club favorite.", price: "$10.59" },
+            { name: "Turkey Club", desc: "Cold sandwich.", price: "$8.99" },
+            { name: "Italian Hoagie", desc: "Includes lettuce, tomatoes, onions, and choice of side.", price: "$10.99" },
+            { name: "American Hoagie", desc: "Ham, American, and salami.", price: "$8.99" },
+            { name: "Buffalo Chicken Wrap", desc: "Breaded chicken with tomatoes and blue cheese.", price: "$9.99" },
+            { name: "Grilled Chicken Caesar Wrap", desc: "Romaine, grilled chicken, Caesar dressing.", price: "$9.99" },
+            { name: "Chicken Cobb Wrap", desc: "Bacon, avocado, blue cheese, tomatoes, lettuce.", price: "$10.99" }
+          ]
+        },
+        {
+          category: "Apps & Salads",
+          note: "Snacks, wings, soups, and entrée-size salads.",
+          items: [
+            { name: "Cheesesteak Quesadilla", desc: "Loaded quesadilla.", price: "$10.99" },
+            { name: "Chicken & Cheese Quesadilla", desc: "Melty and shareable.", price: "$11.29" },
+            { name: "Buffalo Chicken Quesadilla", desc: "Spicy buffalo finish.", price: "$11.59" },
+            { name: "Pizza Skins / Bacon Skins / Chili Skins", desc: "Potato skins trio.", price: "$6.99" },
+            { name: "12 Wings", desc: "Extra bleu cheese +$3.00.", price: "$15.59" },
+            { name: "24 Wings", desc: "Buffalo mild to extra hot, honey BBQ, Thai, Cajun, and more.", price: "$29.60" },
+            { name: "Soup Du Jour / Chili / French Onion", desc: "Cup and bowl options available.", price: "$3.59+" },
+            { name: "House Salad", desc: "Tomatoes, cheese, cucumbers, croutons over lettuce.", price: "$8.99" },
+            { name: "Crispy Buffalo Chicken Salad", desc: "Chicken apple walnut also available.", price: "$10.99+" },
+            { name: "Caesar / Cobb / Greek", desc: "From classic Caesar to fuller dinner salads.", price: "$9.29+" }
+          ]
+        },
+        {
+          category: "Entrées",
+          note: "Served with soup or salad and your choice of fries, coleslaw, or pasta where noted.",
+          items: [
+            { name: "Baby Back Ribs", desc: "Half rack or full rack.", price: "$12.99 / $19.99" },
+            { name: "Homestyle Crab Cakes", desc: "Two crab cakes.", price: "$19.99" },
+            { name: "8 oz. Flat Iron Steak", desc: "Classic entrée option.", price: "$15.99" },
+            { name: "Meatball Parm", desc: "Entrée-size serving.", price: "$14.99" },
+            { name: "Chicken Parm", desc: "Breaded and topped with sauce and cheese.", price: "$15.99" },
+            { name: "Sausage, Peppers & Onions Parm", desc: "Hearty Italian-American plate.", price: "$14.99" },
+            { name: "Fish and Chips Basket", desc: "Also country fried shrimp and chicken fingers.", price: "$10.99" }
+          ]
+        },
+        {
+          category: "Burgers & More",
+          note: "Homemade burgers and chicken sandwiches served with your choice of side.",
+          items: [
+            { name: "Clubhouse Burger / Chicken", desc: "Lettuce, tomatoes, mayo.", price: "$8.99 / $9.99" },
+            { name: "Bacon Bleu Burger", desc: "Swiss, blue cheese, lettuce, tomatoes.", price: "$10.99" },
+            { name: "Black Jack Burger / Chicken", desc: "American cheese, tomatoes, onions, aioli.", price: "$10.99 / $11.99" },
+            { name: "Peppercorn Burger", desc: "Peppercorn, raw onions, blue cheese.", price: "$10.99" },
+            { name: "Patty Melt", desc: "Fried or grilled onions and Swiss.", price: "$10.59" },
+            { name: "Chicken Cordon Bleu", desc: "Ham, Swiss, honey mustard.", price: "$11.99" },
+            { name: "Chicken Supreme", desc: "Spinach, roasted peppers, provolone on a Kaiser.", price: "$11.99" },
+            { name: "Fountain Drinks / 20 oz. Soda / 2-Liter / Water", desc: "Pepsi products.", price: "$1.25+" }
+          ]
+        }
+      ];
+
+      const filtersEl = document.getElementById("menuFilters");
+      const gridEl = document.getElementById("menuGrid");
+      const galleryTrack = document.getElementById("galleryTrack");
+      let activeCategory = "All";
+
+      function setHTML(id, value) {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = value;
+      }
+
+      function setText(id, value) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = value;
+      }
+
+      function setLink(id, href, label) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.href = href;
+        el.textContent = label;
+      }
+
+      function applySiteContent() {
+        setText("heroEyebrow", SITE_CONTENT.heroEyebrow);
+        setHTML("heroTitle", SITE_CONTENT.heroTitle);
+        setHTML("heroParagraph", SITE_CONTENT.heroParagraph);
+        setText("statAddressTitle", SITE_CONTENT.statAddressTitle);
+        setText("statAddressText", SITE_CONTENT.statAddressText);
+        setText("statPhoneTitle", SITE_CONTENT.statPhoneTitle);
+        setText("statPhoneText", SITE_CONTENT.statPhoneText);
+        setText("statCateringTitle", SITE_CONTENT.statCateringTitle);
+        setText("statCateringText", SITE_CONTENT.statCateringText);
+        setText("menuEyebrow", SITE_CONTENT.menuEyebrow);
+        setText("menuTitle", SITE_CONTENT.menuTitle);
+        setText("galleryEyebrow", SITE_CONTENT.galleryEyebrow);
+        setText("galleryTitle", SITE_CONTENT.galleryTitle);
+        setHTML("galleryParagraph", SITE_CONTENT.galleryParagraph);
+        setText("serviceEyebrow", SITE_CONTENT.serviceEyebrow);
+        setText("serviceTitle", SITE_CONTENT.serviceTitle);
+        setHTML("serviceParagraph", SITE_CONTENT.serviceParagraph);
+        setText("cateringEyebrow", SITE_CONTENT.cateringEyebrow);
+        setHTML("cateringTitle", SITE_CONTENT.cateringTitle);
+        setHTML("cateringParagraph", SITE_CONTENT.cateringParagraph);
+        setText("aboutEyebrow", SITE_CONTENT.aboutEyebrow);
+        setText("aboutTitle", SITE_CONTENT.aboutTitle);
+        setHTML("aboutQuote", SITE_CONTENT.aboutQuote);
+        setHTML("aboutParagraph", SITE_CONTENT.aboutParagraph);
+        setText("visitEyebrow", SITE_CONTENT.visitEyebrow);
+        setText("visitTitle", SITE_CONTENT.visitTitle);
+        setHTML("visitAddress", SITE_CONTENT.visitAddress);
+        setLink("phoneLink", SITE_CONTENT.phoneHref, SITE_CONTENT.phoneNumber);
+        setLink("websiteLink", SITE_CONTENT.websiteHref, SITE_CONTENT.websiteLabel);
+        setLink("menuLink", SITE_CONTENT.menuLinkHref, SITE_CONTENT.menuLinkLabel);
+
+        const heroImg = document.querySelector("#heroMedia img");
+        if (heroImg) heroImg.src = SITE_IMAGES.hero;
+      }
+
+      function renderFilters() {
+        const categories = ["All", ...menuData.map((section) => section.category)];
+        filtersEl.innerHTML = categories
+          .map(
+            (category) => `
+              <button class="button menu-filter ${category === activeCategory ? "is-active" : ""}" data-category="${category}">
+                ${category}
+              </button>
+            `
+          )
+          .join("");
+      }
+
+      function renderMenu() {
+        const visibleSections =
+          activeCategory === "All"
+            ? menuData
+            : menuData.filter((section) => section.category === activeCategory);
+
+        gridEl.innerHTML = visibleSections
+          .map(
+            (section) => `
+              <article class="menu-card">
+                <div class="menu-meta">
+                  <h3>${section.category}</h3>
+                  <div class="chip" style="background: rgba(91,110,45,0.08); border-color: rgba(91,110,45,0.14); color: var(--olive-deep);">
+                    ${section.items.length} items
+                  </div>
+                </div>
+                <p class="menu-note">${section.note}</p>
+                <div class="menu-list">
+                  ${section.items
+                    .map(
+                      (item) => `
+                        <div class="menu-item">
+                          <div>
+                            <strong>${item.name}</strong>
+                            <span>${item.desc}</span>
+                          </div>
+                          <div class="price">${item.price}</div>
+                        </div>
+                      `
+                    )
+                    .join("")}
+                </div>
+              </article>
+            `
+          )
+          .join("");
+      }
+
+      function renderGallery() {
+        galleryTrack.innerHTML = SITE_IMAGES.gallery
+          .map(
+            (image, index) => `
+              <article class="gallery-slide is-missing" data-missing="Add ${image.src}">
+                <img
+                  src="${image.src}"
+                  alt="${image.label}"
+                  onload="this.parentElement.classList.remove('is-missing')"
+                  onerror="this.remove()"
+                />
+                <span>${image.label}</span>
+              </article>
+            `
+          )
+          .join("");
+      }
+
+      filtersEl.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-category]");
+        if (!button) return;
+        activeCategory = button.dataset.category;
+        renderFilters();
+        renderMenu();
+      });
+
+      document.getElementById("galleryPrev").addEventListener("click", () => {
+        galleryTrack.scrollBy({ left: -320, behavior: "smooth" });
+      });
+
+      document.getElementById("galleryNext").addEventListener("click", () => {
+        galleryTrack.scrollBy({ left: 320, behavior: "smooth" });
+      });
+
+      renderFilters();
+      applySiteContent();
+      renderMenu();
+      renderGallery();
+    </script>
+  </body>
+</html>
