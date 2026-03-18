@@ -59,8 +59,13 @@
         top: 0;
         z-index: 20;
         backdrop-filter: blur(18px);
-        background: rgba(255, 253, 248, 0.9);
+        background: rgba(255, 253, 248, 0.96);
         border-bottom: 1px solid rgba(111, 39, 35, 0.08);
+        transition: box-shadow 0.3s ease;
+      }
+
+      .topbar.scrolled {
+        box-shadow: 0 2px 16px rgba(21,21,21,0.10);
       }
 
       .topbar-inner {
@@ -69,6 +74,43 @@
         align-items: center;
         justify-content: space-between;
         gap: 24px;
+        transition: min-height 0.3s ease, padding 0.3s ease;
+      }
+
+      /* Scrolled state — shrink the bar */
+      .topbar.scrolled .topbar-inner {
+        min-height: 48px;
+      }
+
+      /* Hide nav links when scrolled, keep only logo + call button */
+      .topbar.scrolled .nav-links {
+        display: none;
+      }
+
+      /* Brand mark shrinks */
+      .topbar.scrolled .brand-mark {
+        width: 34px;
+        height: 34px;
+        font-size: 17px;
+        transition: all 0.3s ease;
+      }
+
+      /* Eyebrow hides when scrolled */
+      .topbar.scrolled .eyebrow {
+        display: none;
+      }
+
+      /* Brand name gets smaller */
+      .topbar.scrolled .brand-name {
+        font-size: 1rem;
+        transition: font-size 0.3s ease;
+      }
+
+      /* Call button shrinks */
+      .topbar.scrolled .button.primary {
+        min-height: 36px;
+        padding: 0 16px;
+        font-size: 0.8rem;
       }
 
       .brand {
@@ -706,10 +748,12 @@
           </div>
         </a>
         <nav class="nav">
-          <a href="#menu">Menu</a>
-          <a href="#catering">Catering</a>
-          <a href="#about">About</a>
-          <a href="#visit">Visit</a>
+          <span class="nav-links">
+            <a href="#menu">Menu</a>
+            <a href="#catering">Catering</a>
+            <a href="#about">About</a>
+            <a href="#visit">Visit</a>
+          </span>
           <a class="button primary" href="tel:2159681005">Call Now</a>
         </nav>
       </div>
@@ -1266,6 +1310,21 @@
       applySiteContent();
       renderMenu();
       renderGallery();
-    </script>
+    
+      // ── Shrinking header on scroll ──
+      (function() {
+        var topbar = document.querySelector('.topbar');
+        var lastScroll = 0;
+        window.addEventListener('scroll', function() {
+          var scrollY = window.scrollY || window.pageYOffset;
+          if (scrollY > 60) {
+            topbar.classList.add('scrolled');
+          } else {
+            topbar.classList.remove('scrolled');
+          }
+          lastScroll = scrollY;
+        }, { passive: true });
+      })();
+</script>
   </body>
 </html>
